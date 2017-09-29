@@ -1,17 +1,15 @@
 ---
 layout: post
-title: "Testing out"
+title: "Introduction"
 subtitle: "Hello World!"
 date: 2017-09-29
 author: V3ded
-category: Jekyll
-tags: jekyll github blog
+category: Casual
+tags: blog 
 finished: true
 ---
 
 
-## Welcome
+## Welcome to my page
 
-This is a test.
-
-Hello World!
+Stuff will eventually be added. For now I'm just experimenting with random things.
