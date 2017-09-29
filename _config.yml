@@ -1,6 +1,6 @@
 # Site settings
 title: V3ded's Workshop
-name: Nice Blog # your name
+name: V3ded # your name
 email: ramonurge@gmail.com # your email address
 description: >
     A website where I post about security and infosec related concepts!
@@ -10,7 +10,7 @@ twitter_username: V3ded # your Twitter username
 github_username: V3ded # your Github username
 disqus_username: X # your disqus username
 
-google-analytics: UA-75034651-1 # add it if you have one
+google-analytics:  # add it if you have one
 
 skillstree: true # turn on or off the skills tree in about page
 
