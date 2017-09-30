@@ -15,7 +15,7 @@ finished: true
 {% highlight c %}
 /* Hello World program */
 
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -25,14 +25,14 @@ int main()
 }
 {% endhighlight %}
 
-###Links:
+### Links:
 <https://google.com>
 
-###footers:
+### footers:
 This is a footnote[^1].
 [^1]: Explanation of our footnote 
 
-###console attempt:
+### console attempt:
 ```console
 int main()
 {
@@ -41,7 +41,7 @@ int main()
     return 0;
 }
 ```
-###Fonts
+### Fonts
 *This is italic*
 **This is bold** 
 > This is blockquote
