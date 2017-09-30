@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Introduction"
-subtitle: "Hello World!"
+title: "Hello World!"
+subtitle: "~ Brief Introduction ~"
 date: 2017-09-29
 author: V3ded
 category: Casual
@@ -12,4 +12,8 @@ finished: true
 
 ## Welcome to my page
 
-Stuff will eventually be added. For now I'm just experimenting with random things.
+First of all, welcome to my blog. I hope to start blogging about security related concepts soon. Not that anyone is reading this, but is there any preffered content you would like to see? 
+
+~V3
+
+<a href="/img/blog/helloworld.png"><img src="/img/blog/helloworld.png"></a> 
