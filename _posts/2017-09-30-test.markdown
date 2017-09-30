@@ -34,9 +34,17 @@ This is a footnote[^1].
 
 ### console attempt:
 ```console
-demo@Testbox:~/Desktop/Git/MyWeb$ 
+user@TestBox:~/Desktop$ apt-get update 
+W: chmod 0700 of directory /var/lib/apt/lists/partial failed - SetupAPTPartialDirectory (1: Operation not permitted)
+E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+E: Unable to lock directory /var/lib/apt/lists/
+W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
+E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
+E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 ```
 ### Fonts
 *This is italic*<br>
 **This is bold** 
 > This is blockquote
+
