@@ -34,14 +34,9 @@ This is a footnote[^1].
 
 ### console attempt:
 ```console
-int main()
-{
-    printf("Hello World");
-
-    return 0;
-}
+demo@Testbox:~/Desktop/Git/MyWeb$ 
 ```
 ### Fonts
-*This is italic*
+*This is italic*<br>
 **This is bold** 
 > This is blockquote
