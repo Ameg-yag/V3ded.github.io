@@ -99,7 +99,7 @@ Nmap done: 1 IP address (1 host up) scanned in 121.00 seconds
 
 We get hits on different ports such as 22 [SSH], 80 [HTTP], 111 [RPC bind], 3306 [MYSQL] and more.  Because our target is running an HTTP web server we put the IP in a browser which results in this page:
 
-<img src="/img/blog/IMG_1797.jpg">
+<img src="/img/blog/IMG_1797.JPG">
 
 This seems like a custom, lazy-made login function. Normally I wouldn't try and break login pages & their authentication in the first stage of enumeration, but because of the cheap look, an attempt for [SQL injection](https://www.w3schools.com/sql/sql_injection.asp) won't hurt. And indeed, a simple `' or 1=1#` did the trick!  Login has been successfully bypassed and we are presented with yet another challenge!  
 
