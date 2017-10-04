@@ -105,7 +105,7 @@ This seems like a custom, lazy-made login function. Normally I wouldn't try and 
 
 <img src="/img/blog/IMG_1798.JPG">
 
-From enough completed challenges and CTFs I immediately recognized a possible code injection vulnerability. Let me explain. Our current webapp prompts us to enter a machine to ping. If you think about what's happening inside our target, a command like this is parsed: `ping Entered_IP`. Seems harmless, right? Well, no it is not! A character like "semicolon" (;) or "OR (||) can be used to append a terminator to the preset ping command which changes a query from `ping ENTERED_IP` to  `ping ENTERED_IP; malicious input`. This effectively allows for code execution which makes us able to enter any command we like into our designated machine. 
+From enough completed challenges and CTFs I immediately recognized a possible code injection vulnerability. Let me explain. Our current webapp prompts us to enter a machine to ping. If you think about what's happening inside our target, a command like this is parsed: `ping Entered_IP`. Seems harmless, right? Well, no it is not! A character like "semicolon" (;) or "OR" can be used to append a terminator to the preset ping command which changes a query from `ping ENTERED_IP` to  `ping ENTERED_IP; malicious input`. This effectively allows for code execution which makes us able to enter any command we like into our designated machine. 
 
 <img src="img/blog/IMG_1799.JPG">
 
