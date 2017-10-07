@@ -13,6 +13,7 @@ finished: true
 
 [Zico2](https://www.vulnhub.com/entry/zico2-1,210/)! Yet another machine to continue our learning journey of enumerating & breaking into systems. How exciting does that sound? Make yourself comfortable and let's start.
 
+
 # Reconnaissance
 
 Before starting information gathering we need to get the IP of our target box. The method you choose may vary, however I sided with a simple netdiscover ARP scan.
