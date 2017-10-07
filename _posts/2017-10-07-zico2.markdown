@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Zico2 writeup"
-subtitle: "~ Walkthrough of Zico2 2 machine ~"
+subtitle: "~ Walkthrough of Zico2 machine ~"
 date: 2017-10-07
 author: V3ded
 category: CTF
