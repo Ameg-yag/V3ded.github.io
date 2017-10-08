@@ -128,7 +128,7 @@ Time to look around! Top header bar shows us 4 options - about, services, portfo
 
 <img src="/img/blog/zico2/Zico2.png">
 
-Interesting enough, the URL is possibly prone to *[Local File Inclusion]*(https://www.acunetix.com/blog/articles/local-file-inclusion-lfi/) from the looks of it. `http://192.168.1.17/view.php?page=../../../../etc/passwd` writes out the content of passwd file which proves the previous statement of possible LFI. Unfortunately LFI only allows us to read files, not upload them. Blindly browsing through the filesystem won't result in anything. I attempted many tricks such as *php://expect*, *php://filter*, */proc/self/environ* code execution to improve the current situation... Unfortunately, the results came out blank. Check [LFI cheatsheet](https://highon.coffee/blog/lfi-cheat-sheet/) from HighOnCoffee if any of these things are unclear to you.
+Interesting enough, the URL is possibly prone to [Local File Inclusion](https://www.acunetix.com/blog/articles/local-file-inclusion-lfi/) from the looks of it. `http://192.168.1.17/view.php?page=../../../../etc/passwd` writes out the content of passwd file which proves the previous statement of possible LFI. Unfortunately LFI only allows us to read files, not upload them. Blindly browsing through the filesystem won't result in anything. I attempted many tricks such as *php://expect*, *php://filter*, */proc/self/environ* code execution to improve the current situation... Unfortunately, the results came out blank. Check [LFI cheatsheet](https://highon.coffee/blog/lfi-cheat-sheet/) from HighOnCoffee if any of these things are unclear to you.
 
 LFI PoC:
 <img src="/img/blog/zico2/Zico3.png">      
