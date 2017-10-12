@@ -11,7 +11,7 @@ finished: true
 
 # Intro
 
-[Bulldog](https://www.vulnhub.com/entry/bulldog-1,211/) is an intermediate level machine with supposedly multiple levels of entry made by [Nick](https://twitter.com/@frichette_n) . Hopefully you will enjoy your stay and read the whole blog. Let's get started! 
+[Bulldog](https://www.vulnhub.com/entry/bulldog-1,211/) is an intermediate level machine with supposedly multiple levels of entry made by [Nick](https://twitter.com/@frichette_n). Hopefully you will enjoy your stay and read the whole blog. Let's get started! 
 
 ***
 
