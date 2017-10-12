@@ -205,9 +205,9 @@ All we need to find now is a way to login and use the cracked credentials. Onto 
 
 <img src="/img/blog/bulldog/Bulldog04.png">
 
-No cigar. We need to authenticate first. But where? Maybe we will be able to do so in */admin/* directory? 
+No cigar. We need to authenticate first. But where? Maybe we will be able to do so in **/admin/** directory? 
 
-<img src="/img/blog/Bulldog05.png">
+<img src="/img/blog/bulldog/Bulldog05.png">
 
 Indeed we are! Let's login using `sarah:bulldoglover` or `nick:bulldog` credentials and see what we get.
 
