@@ -6,6 +6,8 @@ description: >
     A website where I post about security and infosec related concepts!
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://v3ded.github.io" # the base hostname & protocol for your site
+plugins:
+  - jekyll-sitemap
 twitter_username: V3ded # your Twitter username
 github_username: V3ded # your Github username
 disqus_username: v3dedworkshop # your disqus username
