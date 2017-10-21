@@ -253,7 +253,7 @@ Easy! Time for some privilege escalation.
 ***
 
 # Escalating privileges from django to root
-From doing a `whoami` or `id` command we can see that our shell is running under django user with limited privileges. Escalation is needed. I checked some common directories such as **/var/html/***, **/tmp**, **/etc/**, but got no results. Not finding any system misconfigurations I shift to **/home/** where two folders are present. *Django* (ours) and *bulldogadmin*. *buldogadmin* has a hidden file in its home directory which can be seen using `ls -la` (list all). 
+From doing a `whoami` or `id` command we can see that our shell is running under django user with limited privileges. Escalation is needed. I checked some common directories such as **/var/html/**, **/tmp**, **/etc/**, but got no results. Not finding any system misconfigurations I shift to **/home/** where two folders are present. *Django* (ours) and *bulldogadmin*. *buldogadmin* has a hidden file in its home directory which can be seen using `ls -la` (list all). 
 
 <img src="/img/blog/bulldog/Bulldog12.png">
 
