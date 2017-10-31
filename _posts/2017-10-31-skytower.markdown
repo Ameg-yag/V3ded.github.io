@@ -118,7 +118,7 @@ proxychains ssh john@192.168.1.16
 
 <img src="/img/blog/skytower/skytower-05.png">
 
-Unfortunately the connection immediately drops. Most probably because `.bashrc` file has an *exit* instruction somewhere within it. To circumvent this, I just rename `.bashrc` and retry the login. This can be done with:
+Unfortunately the connection immediately drops. Most probably because `.bashrc` file has an *exit* instruction somewhere within it. To circumvent this, I just rename `.bashrc` on the target system and retry the login. This can be done by chaining a command right after doing SSH connect:
 
 <img src="/img/blog/skytower/skytower-06.png">
 
@@ -174,7 +174,7 @@ mysql> SELECT * FROM login;
 ```
 If some of the queries are unclear I recommend reading a MySQL [cheatsheet](https://www.digitalocean.com/community/tutorials/a-basic-mysql-tutorial) by DigitalOcean. 
 
-Afterwards I tried to login as Wiliam, but his credentials don't work. However Sara's do! She has the same *exit* annoyance thingy in `.bashrc` as John, but we already know how to go around it :).
+Afterwards I tried to login as Wiliam, but his credentials don't work. However Sara's do! She has the same *exit* annoyance thingy in `.bashrc` as John, but fear not. We already know how to go around it :).
 
 <img src="/img/blog/skytower/skytower-08.png">
 
@@ -189,9 +189,9 @@ sara@SkyTower:~$ sudo cat /accounts/../root/flag.txt
 Congratz, have a cold one to celebrate!
 root password is theskytower
 sara@SkyTower:~$ 
-```console
+```
 
-Just do `su root`, supply in the password and BAAM! 
+Just do `su root`, enter the password and BAAM! 
 
 <img src="/img/blog/skytower/skytower-10.png">
 
@@ -199,8 +199,10 @@ Just do `su root`, supply in the password and BAAM!
 
 ***
 
-Conclusion:
-In my opinion a prety solid box. I learnt few new things and had fun while doing so. What more can you wish for?! My thanks goes to **bitvijays** for providing me with guidance when I got stuck once or twice :). Check out his blog at <http://bitvijays.github.io/> ! If there are any questions feel free to reach out to me by sending an email or leaving a comment down bellow.  
+# Conclusion
 
+In my opinion a prety solid box. I learnt few new things and had fun while doing so. What more can you wish for?! My thanks goes to **bitvijays** for providing me with guidance when I got stuck once or twice. Check out his blog at <http://bitvijays.github.io/> ! If there are any questions feel free to reach out to me by sending an email or leaving a comment down bellow.  
 
 ~V3 
+
+<img src="/img/blog/skytower/bye.png">
