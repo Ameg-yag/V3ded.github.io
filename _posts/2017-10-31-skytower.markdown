@@ -11,13 +11,13 @@ finished: true
 
 # Introduction
 
-Next walkthrough [VM](https://www.vulnhub.com/entry/skytower-1,96/) was made by Telspace Systems for a BSidesCPT security summit. Rated intermediate difficulty and assigned to 'todo' machines as preparation for OSCP I decided to give it a try. Time to start! 
+Next walkthrough [VM](https://www.vulnhub.com/entry/skytower-1,96/) was made by Telspace Systems for a BSidesCPT security summit. Rated intermediate difficulty and assigned to 'todo' machines as preparation for OSCP I decided to give it a try. *Time to start!* 
 
 ***
 
 # Recon
 
-Netdiscovery to find the initial SkyTower's IP:
+Start with **netdiscover** to find the initial SkyTower's IP:
 
 ```console
  Currently scanning: 192.168.31.0/16   |   Screen View: Unique Hosts                                           
@@ -40,7 +40,7 @@ Netdiscovery to find the initial SkyTower's IP:
 
 Our target is **192.168.1.16**!
 
-Proceed with nmap scan to find open ports and their services:
+Proceed with **nmap** scan to find open ports and their services:
 
 ```console
 root@EdgeOfNight:~# nmap -A -T5 -sS 192.168.1.16
@@ -79,15 +79,15 @@ Nmap scan shows, that there is a running HTTP Apache web server. Upon loading th
 
 <img src="/img/blog/skytower/skytower-01.png">
 
-An interesting page with login functionality! I wonder how it reacts to SQL statements? Login crashes when we input a simple apostrophe - `'` inside username field. Clear sign of an SQL injection. 
+An interesting page and a login functionality! I wonder how it reacts to SQL statements? Login crashes when we input a simple apostrophe - `'` inside username field. Clear sign of an SQL injection. 
 
 <img src="/img/blog/skytower/skytower-02.png">  
 
-A common login bypass would be a crafted request which looks similar to: `' OR 1=1#`. Unfortunately there is a filter which prevents the injection:
+A common login bypass would be a crafted request which looks very similar to: `' OR 1=1#`. Unfortunately there is a filter which prevents the injection:
  
 <img src="/img/blog/skytower/skytower-03.png">  
 
-`OR` and `=` completely dissapeared from the query. Hmm... A certain filter is blocking SQL keywords to prevent injections from happening. If you don't know what to do, you should read an [article](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF) about bypassing filters / WAFs by OWASP. After enough trial and error I found a string which worked. `' OORR 1=1#` bypasses the defenses and puts us past the login!  
+`OR` and `=` completely dissapeared from the query. Hmm... A certain filter is blocking SQL keywords to prevent a disaster. If you don't know what to do, you should read an [article](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF) about bypassing filters / WAFs by OWASP. After enough trial and error I found a string which worked. `' OORR 1=1#` bypasses the defenses and puts us past the login!  
 
 <img src="/img/blog/skytower/skytower-04.png">  
 
@@ -111,7 +111,7 @@ Edit `/etc/proxychains.conf` file and add:
 http	192.168.1.16	3128 #SQUID PROXY
 ``` 
 
-After that just connect to SSH with proxychains:
+After that just connect to SSH via proxychains:
 ```console
 proxychains ssh john@192.168.1.16
 ``` 
@@ -182,7 +182,7 @@ Then do `sudo -l`
 
 <img src="/img/blog/skytower/skytower-09.png">
 
-which reveals we can run `/bin/cat /accounts/` with root privileges. This alows for a path traversal and `cat`-ing of protected content. In my case the root flag.
+which reveals we can run `/bin/cat /accounts/` under root privileges. This alows for a path traversal and `cat`-ing of protected content. In my case the root flag.
 
 ```console
 sara@SkyTower:~$ sudo cat /accounts/../root/flag.txt
