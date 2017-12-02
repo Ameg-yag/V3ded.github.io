@@ -11,7 +11,7 @@ finished: true
 
 # Introduction
 
-As of 03.11.2017 *Europa* is a retired box at `[HackTheBox]`(https://www.hackthebox.eu/). HTB is a platform with well over 40 machines made for exploitation and honing of your penetration testing skills. I can't reccommend it enough, so go and give it a look. Let's get started!
+As of 03.11.2017 *Europa* is a retired box at [HackTheBox](https://www.hackthebox.eu/). HTB is a platform with well over 40 machines made for exploitation and honing of your penetration testing skills. I can't reccommend it enough, so go and give it a look. Let's get started!
 
 ***
 
@@ -67,6 +67,8 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 77.84 seconds
 ```
 
+***
+
 ## Port 80 and 443
 Both return a default apache2 webpage which doesn't give us much to go on.
 
@@ -90,7 +92,7 @@ Manual injection was a lengthy process of trial and error, crying into my pillow
 
 Afterwards send it to burp repeater by clicking **Action >> Send to Repeater** or by pressing  `CTRL+R`. In there you can start tinkering with SQL commands and various injection methods you think may work or might give good results. One which worked for me is right below. 
 
-> 'UNION ALL SELECT NULL,NULL,NULL,NULL,NULL#`
+> 'UNION ALL SELECT NULL,NULL,NULL,NULL,NULL#
 
 To compromise the application:
 * Feed our injection to the repeater 
@@ -151,10 +153,10 @@ SQLmap clearly tells us that the webpage is vulnerable. Chaining these commands 
 Eventually, SQLmap will obtain password hashes for you which can then be [cracked](https://hashkiller.co.uk/md5-decrypter.aspx).
 ```console
 +----+----------------------+--------+---------------+----------------------------------+
-| id | email                                 | active   | username         | password                                          |
+| id | email                | active | username      | password                         |
 +----+----------------------+--------+---------------+----------------------------------+
-| 1  | admin@europacorp.htb | 1            | administrator    | 2b6d315337f18617ba18922c0b9597ff |
-| 2  | john@europacorp.htb    | 1            | john                   | 2b6d315337f18617ba18922c0b9597ff |
+| 1  | admin@europacorp.htb | 1      | administrator | 2b6d315337f18617ba18922c0b9597ff |
+| 2  | john@europacorp.htb  | 1      | john          | 2b6d315337f18617ba18922c0b9597ff |
 +----+----------------------+--------+---------------+----------------------------------+
 ```
 <img src="/img/blog/htb-europa/htb-europa-07.png">
@@ -199,8 +201,9 @@ Following my usual information gathering steps I find a running vulnerable cronj
 
 ```console
 $ cat /etc/crontab
+
 # /etc/crontab: system-wide crontab
-# Unlike any other crontab you don't have to run the `crontab'
+# Unlike any other crontab you do not have to run the `crontab'
 # command to install the new version when you edit this file
 # and files in /etc/cron.d. These files also have username fields,
 # that none of the other crontabs do.
@@ -221,6 +224,7 @@ Cron is calling a clearlogs script at `/var/www/cronjobs/clearlogs` with root pr
 
 ```console
 $ cat /var/www/cronjobs/clearlogs
+
 #!/usr/bin/php
 <?php
 $file = '/var/www/admin/logs/access.log';
