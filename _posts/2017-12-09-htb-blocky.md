@@ -1,3 +1,14 @@
+---
+layout: post
+title: "HackTheBox - Blocky writeup"
+subtitle: "~ Walkthrough of Blocky machine from HackTheBox ~"
+date: 2017-12-09
+author: V3ded
+category: CTF
+tags: blog ctf pentesting hackthebox
+finished: true
+---
+
 # Introduction
 
 Blocky is another machine in my continuation of `HackTheBox` series. Rated easy to intermediate difficulty, it's a good box for beginners or casual pen-tester enthusiasts. Let's get right into it!  
