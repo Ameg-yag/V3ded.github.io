@@ -52,7 +52,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 101.75 seconds
 ```
 
-3 open services are running - *SSH* (22), *FTP* (21) and *HTTP* (80). To make this blog a bit shorter I will leave out enumeration of FTP and SSH as none of them lead to this machine's solution. If you're interested about learning enumeration of either of these I'd suggest **bitvijay's** blogposts - <a href="https://bitvijays.github.io/LFF-IPS-P2-VulnerabilityAnalysis.html#ftp-port-21" target=_blank>here</a> and <a href="https://bitvijays.github.io/LFF-IPS-P2-VulnerabilityAnalysis.html#ssh-port-22" target=_blank>here</a>.
+3 open services are running - *SSH* (22), *FTP* (21) and *HTTP* (80). To make this blog a bit shorter I will leave out enumeration of FTP and SSH as none of them lead to this machine's solution. If you're interested about learning enumeration of either of these I'd suggest **bitvijay's** blogposts - [here](https://bitvijays.github.io/LFF-IPS-P2-VulnerabilityAnalysis.html#ftp) and [here](https://bitvijays.github.io/LFF-IPS-P2-VulnerabilityAnalysis.html#ssh-port-22).
 
 ## Port 80
 
@@ -251,7 +251,7 @@ _______________________________________________________________
 ```
 > --enumerate = enumerates everything including plugins, users, etc.
 
-That's a lot of vulnerabilties, isn't it? Unfortunately none of them can be exploited (we can at least note down the username `notch`). Proceeding to browse previously mentioned directories, I notice that `/plugins/` folder has *jar* files inside it which can be easily [reverse engineered or disassembled](https://tools.kali.org/reverse-engineering/jad). Hopefully we can find some hard-coded credentials?
+That's a lot of vulnerabilities, isn't it? Unfortunately none of them can be exploited (we can at least note down the username `notch`). Proceeding to browse previously mentioned directories, I notice that `/plugins/` folder has *jar* files inside it which can be easily [reverse engineered or disassembled](https://tools.kali.org/reverse-engineering/jad). Hopefully we can find some hard-coded credentials?
 
 <img src="/img/blog/htb-blocky/htb-blocky-02.png">
 
@@ -308,7 +308,7 @@ public class BlockyCore
 ``` 
 > *jad* produces a file called **BlockyCore.jad** which I just printed out using *cat*
 
-My assumptions were correct and we succssfuly extracted some database credentials. 
+My assumptions were correct and we successfully extracted some database credentials. 
 ```console
 sqlHost = "localhost";
 sqlUser = "root";
