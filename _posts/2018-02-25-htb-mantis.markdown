@@ -149,11 +149,11 @@ Regarding point 1 - the filename looks suspicious. 2 file extensions and "random
 
 <img src="/img/blog/htb-mantis/htb-mantis-04.png">
 
-`
+```console
 Credentials stored in secure format
 OrchardCMS admin creadentials 010000000110010001101101001000010110111001011111010100000100000001110011011100110101011100110000011100100110010000100001
 SQL Server sa credentials file namez
-`
+```
 Secure format? Binary? These two don't go together. By decoding the binary string above we are present with another password: `@dm!n_P@ssW0rd!`. 
 
 So far we have gathered two passwords:
@@ -218,7 +218,7 @@ A new username and a **cleartext** password!
 Instead of exploiting straight away you can use various tools like `rpcclient` or `smbclient` to gather some information. Trying to keep the blog short though, so let's skip that.
 
 ## psexec
-I didn't notice this attack vector in my first attempt, BUT kudos to [ippsec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA) for showing this method in his video! I highly advise you check his channel out.
+I didn't notice this attack vector in my first attempt, BUT kudos to [ippsec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA) for showing this method in his video! I highly advise you check his channel out. This command will use psexec and successfully exploit the machine:
 ```console
 /usr/share/doc/python-impacket/examples/psexec.py htb.local/james@10.10.10.52
 ``` 
