@@ -7,6 +7,7 @@ author: V3ded
 category: CTF
 tags: blog ctf pentesting hackthebox
 finished: true
+---
 
 # Introduction
 Jeeves is a medium rated machine on HackTheBox platform which got retired last weekend (18.05.2018). Core of this machine revolves around pwnage of Jenkins. Let's get to it.
@@ -16,7 +17,7 @@ Jeeves is a medium rated machine on HackTheBox platform which got retired last w
 ***
 
 # Scanning and Enumeration 
-As per usual, start out with **Nmap**:
+As usual, start out with **Nmap**:
 ```console
 root@EdgeOfNight:~# nmap -sV -T4 -sS 10.10.10.63
 
@@ -157,4 +158,3 @@ and viewed with `more < hm.txt:root.txt`:
 Congratulations! At this point there's nothing left - both flags have been retrieved. If you want to view alternative methods which I didn't show (such as rotten potato), I'd highly recommend Ippsec's [video](https://www.youtube.com/watch?v=EKGBskG8APc). His content is great and I often learn many new methods from his tutorials :-) ! Thanks for reading.
 
 ~V3
-
