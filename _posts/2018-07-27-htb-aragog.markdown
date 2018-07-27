@@ -198,7 +198,7 @@ florian@aragog:~$
 *** 
 
 # Privilege escalation
-Time to enumerate! However be careful, there are few rabbit holes in this stage. E.g finding the root password of mysql database in wp-config, connecting to it & attempting to crack administrators password or messing around with CUPS server which us running on local port 631. 
+Time to enumerate! However be careful, there are few rabbit holes in this stage. E.g finding the root password of mysql database in wp-config, connecting to it & attempting to crack administrators password or messing around with CUPS server which is running on local port 631. 
 
 
 The solution itself, is a bit more trickier. If you navigate to `/var/www/html`, you will notice that there is a *dev_wiki* directory (owned by cliff) which we weren't able to find with directory bruteforce. It has 777 permissions, which means it enables us to do some funky stuff - uploading webshells, editing configs and so on. 
