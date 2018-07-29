@@ -2,7 +2,7 @@
 layout: post
 title: "HackTheBox - Valentine writeup"
 subtitle: "~ Walkthrough of Valentine machine from HackTheBox ~"
-date: 2018-07-28
+date: 2018-07-29
 author: V3ded
 category: CTF
 tags: blog ctf pentesting hackthebox
