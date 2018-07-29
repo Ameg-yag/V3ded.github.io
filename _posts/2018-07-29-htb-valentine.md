@@ -118,7 +118,7 @@ PORT    STATE SERVICE  VERSION
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 50.85 seconds
 ```
-There's plenty, right? Second scan confirms that this machine is indeed vulnerable to hearbleed, which allows the attacker (*us*) to leak memory from the target. 
+There's plenty, right? Second scan confirms that this machine is indeed vulnerable to heartbleed, which allows the attacker (*us*) to leak memory from the target. 
 
 As for web enumeration itself, we are present with this image upon visiting HTTP or HTTPS variant of the webpage:
 
@@ -301,12 +301,42 @@ Anyways, now just *su* as the user you created with the password you were prompt
 
 <img src="/img/blog/htb-valentine/htb-valentine-06.png">
 
-Congratulations! You rooted (sort of) Valentine! Now go and get that juicy flag ;).
+## Privilege Escalation #2
+After finishing this blog it was brought to my attention by my friend, [Filip](https://twitter.com/filip_dragovic), that there is also another way to root this machine. Kernel exploits (like as this one), should always be kept as a last resort in case there are *absolutely* no other means of escalating privileges. The reason is, that such exploits can often crash the kernel or make the machine unstable which is something we don't want in a real life environment. Hence, I'll show you the second (probably intended) method as well. 
+
+Second method requires just some determination to read through long output in your terminal. View all the running root processes with `ps aux | grep root`:
+```console
+hype@Valentine:~$ ps aux | grep root
+[REDACTED FOR READABILITY]
+root         25  0.0  0.0      0     0 ?        S    05:57   0:00 [fsnotify_mark]
+root         26  0.0  0.0      0     0 ?        S    05:57   0:00 [ecryptfs-kthrea]
+root         27  0.0  0.0      0     0 ?        S<   05:57   0:00 [crypto]
+root         35  0.0  0.0      0     0 ?        S<   05:57   0:00 [kthrotld]
+[REDACTED FOR READABILITY]
+root         60  0.0  0.0      0     0 ?        S<   05:57   0:00 [devfreq_wq]
+root         96  0.0  0.0      0     0 ?        S    05:57   0:00 [scsi_eh_2]
+root         97  0.0  0.0      0     0 ?        S<   05:57   0:00 [vmw_pvscsi_wq_2]
+root        217  0.0  0.0      0     0 ?        S    05:57   0:00 [jbd2/sda1-8]
+root        218  0.0  0.0      0     0 ?        S<   05:57   0:00 [ext4-dio-unwrit]
+root        317  0.0  0.0  17356   640 ?        S    05:57   0:00 upstart-udev-bridge --daemon
+root        320  0.0  0.1  21876  1712 ?        Ss   05:57   0:00 /sbin/udevd --daemon
+[REDACTED FOR READABILITY]
+root        905  0.0  0.2  49952  2856 ?        Ss   05:58   0:00 /usr/sbin/sshd -D
+root        993  0.0  0.0  19976   968 tty4     Ss+  05:58   0:00 /sbin/getty -8 38400 tty4
+root       1003  0.0  0.0  19976   968 tty5     Ss+  05:58   0:00 /sbin/getty -8 38400 tty5
+root       1007  0.0  0.1  26416  1672 ?        Ss   05:58   0:00 /usr/bin/tmux -S /.devs/dev_sess
+root       1011  0.0  0.0  19976   980 tty2     Ss+  05:58   0:00 /sbin/getty -8 38400 tty2
+[REDACTED FOR READABILITY]
+```
+This is only portion of the normal output. A clever eye might notice a process with PID of 1007 - `/usr/bin/tmux -S /.devs/dev_sess`. This is an active tmux session owned by **root**. [Wikipedia](https://en.wikipedia.org/wiki/Tmux) describes tmux with these words: "tmux is a terminal multiplexer, allowing a user to access multiple separate terminal sessions inside a single terminal window or remote terminal session". Simply said, it's just another type of shell! Anyone can attach to this shell using the following command - `tmux -S /.devs/dev_sess`. Once you drop into the shell, you will be root.
+
+<img src="/img/blog/htb-valentine/htb-valentine-07.png">
+
+**Congratulations!** You rooted Valentine! Now go and get that juicy flag ;).
 
 ***
 
-#Conclusion
-Thank you for reading untill the end! And thank you [mrb3n](www.mrb3n.com) for creating this machine! That's all for now, I hope to see you in another one of my blogposts soon.
+# Conclusion
+Thank you for reading untill the end! And thank you [mrb3n](www.mrb3n.com) for creating this machine! That's all for now, I hope to see you in another one of my blogposts soon. 
 
 ~V3
-
