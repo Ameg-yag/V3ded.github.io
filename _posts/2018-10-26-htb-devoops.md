@@ -11,7 +11,7 @@ finished: true
 
 # Introduction
 <img src="/img/blog/htb-devoops/htb-devoops-01.png">
-
+<br>
 Hey there! Been some time since I actually wrote a new blog. Life is a bit hectic as of now, but who cares, right? As of last two weeks, DevOops from [HTB](https://www.hackthebox.eu/) got retired. Based on a twitter survey I did, over 30 of you wanted to see this writeup and therefore I decided to grant your wishes :D.  So let's get into it! 
 
 ***
