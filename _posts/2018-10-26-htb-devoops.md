@@ -158,7 +158,7 @@ print r.data
 
 {% endhighlight %}
 
-This fires up a reverse shell that connects `10.10.14.51` (my IP) at  port `1235`. Just change the parameters to your needs, set up *netcat* listener (`nc -lvp 1235`) and start the exploit. 
+This fires up a reverse shell that connects to `10.10.14.51` (my IP) at  port `1235`. Just change the parameters to your needs, set up *netcat* listener (`nc -lvp 1235`) and start the exploit. 
 
 <img src="/img/blog/htb-devoops/htb-devoops-08.png">
 
