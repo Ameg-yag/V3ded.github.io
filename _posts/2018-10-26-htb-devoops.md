@@ -163,6 +163,7 @@ This fires up a reverse shell that connects `10.10.14.51` (my IP) at  port `1235
 <img src="/img/blog/htb-devoops/htb-devoops-08.png">
 
 Congratulations on your shells! Now it's time to get the sweet root :).
+
 ***
 
 # Privilege Escalation
