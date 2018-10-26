@@ -92,7 +92,7 @@ There are 2 ways to exploit this vulnerability and turn it into a shell. Before 
 </v3>
 {% endhighlight %}
 
-Don't forget to wrap everything around a root element (in my case <v3>) and use only the previously mentioned XML tags ( [image](/img/blog/htb-devoops/htb-devoops-03.png) ) or the file won't parse and therefore this attack won't work. After submitting our payload we get the following:
+Don't forget to wrap everything around a root element (in my case `<v3>`) and use only the previously mentioned XML tags <a href="/img/blog/htb-devoops/htb-devoops-03.png">(image here)</a> or the file won't parse and therefore this attack won't work. After submitting our payload we get the following:
 
 <img src="/img/blog/htb-devoops/htb-devoops-04.png">
 
