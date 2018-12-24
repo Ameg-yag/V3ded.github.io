@@ -1,7 +1,7 @@
 # Site settings
 title: V3ded's Workshop
 name: V3ded # your name
-email: ramonurge@gmail.com # your email address
+email: mail@nonexisting.com # your email address
 description: >
     A website where I post about security and infosec related concepts!
 baseurl: "/" # the subpath of your site, e.g. /blog
