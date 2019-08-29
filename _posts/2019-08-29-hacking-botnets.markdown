@@ -223,11 +223,11 @@ A quick PoC below:
 ***
 
 # Appendix
-**Miori src:** <a href="/files/pwn-hacking-botnets/Miori.zip" target="_blank"> here </a>
-**Miori exploit:**<a href="/files/pwn-hacking-botnets/MioriRCE.py" target="_blank"> here </a>
+**Miori src:** <a href="/files/pwn-hacking-botnets/Miori.zip" target="_blank"> here </a><br>
+**Miori exploit:**<a href="/files/pwn-hacking-botnets/MioriRCE.py" target="_blank"> here </a><br>
 <br>
-**Switchware src:** <a href="/files/pwn-hacking-botnets/Switchware.zip" target="_blank"> here </a>
-**Switchware exploit:** N/A (*maybe I'll make one later*)
+**Switchware src:** <a href="/files/pwn-hacking-botnets/Switchware.zip" target="_blank"> here </a><br>
+**Switchware exploit:** N/A (*maybe I'll make one later*)<br>
 
 
 ~V3
