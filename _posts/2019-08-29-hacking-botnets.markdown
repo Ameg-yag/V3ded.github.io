@@ -50,7 +50,8 @@ Anyway, it would be a shame if we exploited this vulnerability to hijack the ser
 
 > **Note:** The botnet server needs to be RedHat based because the setup script uses *yum* to download dependencies.
 <br><br>
-> **Note:** CentOS has a firewall running by default. If you are unable to connect to ports such as 666, turn it off with "systemctl stop firewalld" or completely disable it with "systemctl disable firewalld"
+> **Note:** CentOS has a firewall running by default. If you are unable to connect to ports such as 666, turn it off with "*systemctl stop firewalld*" or completely disable it with "*systemctl disable firewalld*"
+
 ***
 
 # Code Auditing
