@@ -65,7 +65,7 @@ Login or register:<br><br>
 Post-auth interaction:
 <img src="/img/blog/pwn-hacking-botnets/miori_connect_02.png">
 
-The overall UI is actually pretty nice, and it seems like someone definitely spent a lot of time on it. Fortunately for us they didn't spend a lot of time on the main code. I dare say it’s atrocious. Multiple oversized *char* buffers, *42 returns and 3 exits...*, horrible indentation, mix of tabs and spaces, 76 `goto` statements (in 2019... really?). And such issues in the code goes on forever. I guess that's what happens when the main goal is to make cool looking UIs and to make money instead of making something reliable and **readable**. Just so you get an idea of how the code looks, feel free to click on the image below to enlarge it.
+The overall UI is actually pretty nice, and it seems like someone definitely spent a lot of time on it. Fortunately for us they didn't spend a lot of time on the main code. I dare say it’s atrocious. Multiple oversized *char* buffers, *42 returns and 3 exits...*, horrible indentation, mix of tabs and spaces, 76 `goto` statements (in 2019... really?). And such issues in the code go on forever. I guess that's what happens when the main goal is to make cool looking UIs and to make money instead of making something reliable and **readable**. Just so you get an idea of how the code looks, feel free to click on the image below to enlarge it.
 
 <a href="/img/blog/pwn-hacking-botnets/miori_cnc_code.png" target="_blank"><img src="/img/blog/pwn-hacking-botnets/miori_cnc_code.png"></a>
 <br>
