@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Script Kiddie Nightmares:<br>Hacking Poorly Coded Botnets"
+title: "Script Kiddie Nightmares: Hacking Poorly Coded Botnets"
 subtitle: "~ AKA, how to exploit shitty code ~"
 date: 2019-08-29
 author: V3ded
