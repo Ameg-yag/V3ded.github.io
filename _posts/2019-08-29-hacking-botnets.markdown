@@ -149,6 +149,8 @@ sock.send(bytes('Press F to pay respects.\r\n',"utf-8")) # Password doesn't matt
 sleep(1)
 ```
 
+> **Note:** One kind redditor pointed out I can pipe the output to `/dev/null` instead of doing clear. A lot better! I wonder why I forgot about such a trivial thing :).  
+
 As you can see, Bash is used in combination with `/dev/tcp/` to create a reverse shell. It's important to notice that each command send contains a carriage return (**\r**) and a new line feed (**\n**). Without the CRLF our exploit wouldn’t work.
 
 > **Note:** CentOS doesn't come with netcat preinstalled. Have that in mind when choosing a reverse shell or attempting data exfiltration
@@ -212,7 +214,7 @@ Cool, right? Although when configured properly on a proper port, the botnet won'
 Thank you dearly for reading if you got this far. This blog is an unusual distraction from my regular CTF blogs, so i hope it was to your liking. I would like to thank my friend Jack for encouraging me to write this blog and the whole *\[SG\] Switch* community for making and distributing badly rewritten botnet versions. 
 
 ## Update: 
-As I was writing this blog, another Qbot rip-off called *switchware* was [released](https://www.youtube.com/watch?v=3ZT1CRtvyY4). I didn't dig into the code much but there is a post-auth RCE vulnerability. It's a very tight one though, as the buffer is limited to 50 bytes and 45 are already supplied. If this blog gets enough traction I can make a second post :). If not, well, you can try to exploit it as an exercise. The exploitable code is on lines *557*,*558* and *566*. 
+As I was writing this blog, another Qbot rip-off called *switchware* was [released](https://www.youtube.com/watch?v=3ZT1CRtvyY4). I didn't dig into the code much but there is a post-auth RCE vulnerability. It's a very tight one though, as the buffer is limited to 50 bytes and 45 are already supplied. If this blog gets enough traction I can make a second post :). If not, well, you can try to exploit it as an exercise. The exploitable code is on lines *557*, *558* and *566*. 
 
 > **DISCLAIMER**: There are some racial comments by the botnet authors which I didn't censor out. Viewer discretion is advised. 
 
